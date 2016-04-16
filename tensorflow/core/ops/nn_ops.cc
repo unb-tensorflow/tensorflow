@@ -218,6 +218,41 @@ output: Broadcasted sum of `value` and `bias`.
 )doc");
 // --------------------------------------------------------------------------
 
+REGISTER_OP("ConfMatrix")
+    .Input("prediction: T")
+    .Input("target: T")
+    .Output("output: T")
+    .Attr("T: {int, float, double}")
+    .Doc(R"doc(
+Calculate the Confusion Matrix for a pair of prediction and target 2-D arrays.
+
+Considering a prediction array such as:
+
+[[1],
+ [2],
+ [3]]
+
+And a target array such as:
+[[2],
+ [2],
+ [3]]
+
+The confusion matrix returned would be the following one:
+
+[[0, 1, 0]
+ [0, 1, 0]
+ [0, 0, 1]]
+
+Both prediction and target must be column arrays of the same shape in order
+for this function to work.
+
+prediction: A column array represeting the predictions for a given classification.
+target: A column array represeting the real labels for the classification task.
+output: A l X l matrix represeting the confusion matrix, where l in the number of
+        possible labels in the classification task.
+)doc");
+// --------------------------------------------------------------------------
+
 REGISTER_OP("Conv2D")
     .Input("input: T")
     .Input("filter: T")
